@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { walkingDistances } from "@/data/walking-distances";
 import { runningDistances } from "@/data/running-distances";
+import { walkingTimes } from "@/data/walking-times";
 
 /**
  * Generate sitemap.xml for all pages.
@@ -29,6 +30,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/how-far-can-i-walk`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/walking-speed`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
   ];
 
   // Walking distance pages
@@ -47,5 +66,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...walkingPages, ...runningPages];
+  // Walking time pages (how far can I walk)
+  const walkingTimePages: MetadataRoute.Sitemap = walkingTimes.map((config) => ({
+    url: `${baseUrl}/how-far-can-i-walk/${config.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...walkingPages, ...runningPages, ...walkingTimePages];
 }

@@ -27,6 +27,7 @@ export default function DistanceCalculator({
   const [activePreset, setActivePreset] = useState<number | null>(
     presets.find((p) => p.minutes === initialMinutes)?.minutes ?? null
   );
+  const [showResults, setShowResults] = useState<boolean>(false);
 
   // Parse time as number, default to 0 if invalid
   const timeNum = useMemo(() => {
@@ -132,9 +133,21 @@ export default function DistanceCalculator({
             Time: <span className="font-medium">{timeDisplay}</span>
           </p>
         )}
+
+        {/* Calculate Button */}
+        <button
+          type="button"
+          onClick={() => setShowResults(true)}
+          disabled={timeNum === 0}
+          className="mt-4 w-full rounded-lg bg-teal-600 px-6 py-3 text-lg font-semibold text-white transition-colors hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
+        >
+          Calculate Distance
+        </button>
       </div>
 
       {/* Results Table */}
+      {showResults && timeNum > 0 && (
+      <>
       <div className="table-container">
         <table className="data-table">
           <thead>
@@ -179,7 +192,7 @@ export default function DistanceCalculator({
       </div>
 
       {/* Moderate pace callout */}
-      {timeNum > 0 && moderateResult && (
+      {moderateResult && (
         <div className="mt-4 rounded-lg bg-amber-50 p-3 text-sm">
           <p className="text-gray-700">
             <span className="font-semibold text-amber-700">Most common:</span>{" "}
@@ -191,11 +204,13 @@ export default function DistanceCalculator({
           </p>
         </div>
       )}
+      </>
+      )}
 
       {/* No time entered state */}
-      {timeNum === 0 && (
+      {!showResults && (
         <div className="mt-4 rounded-lg bg-gray-50 p-4 text-center text-gray-500">
-          Enter a time above to see walking distances.
+          Enter a time above and click Calculate to see walking distances.
         </div>
       )}
     </div>

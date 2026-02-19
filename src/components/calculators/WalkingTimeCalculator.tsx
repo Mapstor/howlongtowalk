@@ -37,6 +37,7 @@ export default function WalkingTimeCalculator({
   const [unit, setUnit] = useState<Unit>(initialUnit);
   const [weight, setWeight] = useState<string>("");
   const [weightUnit, setWeightUnit] = useState<"lbs" | "kg">("lbs");
+  const [showResults, setShowResults] = useState<boolean>(false);
 
   // Parse distance as number, default to 0 if invalid
   const distanceNum = useMemo(() => {
@@ -152,9 +153,21 @@ export default function WalkingTimeCalculator({
             Distance: <span className="font-medium">{distanceDisplay}</span>
           </p>
         )}
+
+        {/* Calculate Button */}
+        <button
+          type="button"
+          onClick={() => setShowResults(true)}
+          disabled={distanceNum === 0}
+          className="mt-4 w-full rounded-lg bg-teal-600 px-6 py-3 text-lg font-semibold text-white transition-colors hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
+        >
+          Calculate Walking Time
+        </button>
       </div>
 
       {/* Results Table */}
+      {showResults && distanceNum > 0 && (
+        <>
       <div className="table-container">
         <table className="data-table">
           <thead>
@@ -215,7 +228,7 @@ export default function WalkingTimeCalculator({
       )}
 
       {/* Steps and Calories Section */}
-      {showExtras && distanceNum > 0 && (
+      {showExtras && (
         <div className="mt-6 border-t border-gray-100 pt-6">
           <h3 className="mb-4 text-lg font-semibold text-gray-900">
             Additional Info
@@ -288,11 +301,13 @@ export default function WalkingTimeCalculator({
           </div>
         </div>
       )}
+      </>
+      )}
 
       {/* No distance entered state */}
-      {distanceNum === 0 && (
+      {!showResults && (
         <div className="mt-4 rounded-lg bg-gray-50 p-4 text-center text-gray-500">
-          Enter a distance above to see walking times.
+          Enter a distance above and click Calculate to see walking times.
         </div>
       )}
     </div>

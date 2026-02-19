@@ -24,7 +24,7 @@
  * formatTimeHuman(1500) // "25h"
  */
 export function formatTimeHuman(totalMinutes: number): string {
-  if (totalMinutes <= 0) return "0m";
+  if (totalMinutes <= 0) return "0 min";
 
   // Round to nearest minute
   const roundedMinutes = Math.round(totalMinutes);
@@ -33,14 +33,14 @@ export function formatTimeHuman(totalMinutes: number): string {
   const minutes = roundedMinutes % 60;
 
   if (hours === 0) {
-    return `${minutes}m`;
+    return `${minutes} min`;
   }
 
   if (minutes === 0) {
-    return `${hours}h`;
+    return `${hours} hr`;
   }
 
-  return `${hours}h ${minutes}m`;
+  return `${hours} hr ${minutes} min`;
 }
 
 // ============================================================================

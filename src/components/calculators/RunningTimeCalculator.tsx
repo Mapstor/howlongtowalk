@@ -61,6 +61,7 @@ export default function RunningTimeCalculator({
   const [activePreset, setActivePreset] = useState<string | null>(
     matchedPreset ? matchedPreset.label : null
   );
+  const [showResults, setShowResults] = useState<boolean>(false);
 
   // Parse distance as number
   const distanceNum = useMemo(() => {
@@ -206,9 +207,21 @@ export default function RunningTimeCalculator({
             Distance: <span className="font-medium">{distanceDisplay}</span>
           </p>
         )}
+
+        {/* Calculate Button */}
+        <button
+          type="button"
+          onClick={() => setShowResults(true)}
+          disabled={distanceNum === 0}
+          className="mt-4 w-full rounded-lg bg-teal-600 px-6 py-3 text-lg font-semibold text-white transition-colors hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
+        >
+          Calculate Running Time
+        </button>
       </div>
 
       {/* Results Table */}
+      {showResults && distanceNum > 0 && (
+      <>
       <div className="table-container">
         <table className="data-table">
           <thead>
@@ -293,11 +306,13 @@ export default function RunningTimeCalculator({
           </div>
         </div>
       </div>
+      </>
+      )}
 
       {/* No distance entered state */}
-      {distanceNum === 0 && (
+      {!showResults && (
         <div className="mt-4 rounded-lg bg-gray-50 p-4 text-center text-gray-500">
-          Select a race or enter a distance above to see running times.
+          Select a race or enter a distance above and click Calculate to see running times.
         </div>
       )}
     </div>

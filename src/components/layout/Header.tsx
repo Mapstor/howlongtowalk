@@ -19,9 +19,14 @@ export default function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="text-lg font-semibold text-teal-700 transition-colors hover:text-teal-800"
+          className="flex items-center gap-2 transition-colors hover:opacity-90"
         >
-          howlongtowalk.org
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-teal-600 to-teal-500 text-xs font-extrabold text-white shadow-sm">
+            HLW
+          </span>
+          <span className="text-lg font-bold text-gray-900">
+            How Long To Walk
+          </span>
         </Link>
 
         {/* Desktop Navigation */}

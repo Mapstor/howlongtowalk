@@ -13,8 +13,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://howlongtowalk.org"),
   title: {
-    default: "How Long to Walk | Walking & Running Time Calculator",
-    template: "%s | howlongtowalk.org",
+    default: "How Long To Walk | Free Walking & Running Time Calculator",
+    template: "%s | How Long To Walk",
   },
   description:
     "Calculate how long it takes to walk or run any distance. Accurate walking times based on pace, with calculators for miles, kilometers, and popular distances.",
@@ -48,26 +48,13 @@ export const metadata: Metadata = {
     title: "How Long to Walk | Walking & Running Time Calculator",
     description:
       "Calculate how long it takes to walk or run any distance. Accurate walking times based on pace.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "howlongtowalk.org - Walking Time Calculator",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "How Long to Walk | Walking & Running Time Calculator",
     description:
       "Calculate how long it takes to walk or run any distance. Accurate walking times based on pace.",
-    images: ["/og-image.png"],
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
-  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({

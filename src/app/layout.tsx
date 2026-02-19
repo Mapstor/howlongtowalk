@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -55,6 +56,12 @@ export const metadata: Metadata = {
     description:
       "Calculate how long it takes to walk or run any distance. Accurate walking times based on pace.",
   },
+  verification: {
+    google: "google12f8c2f9c03913a3",
+    other: {
+      "msvalidate.01": "57C407E8336C4915E2D28EEA649C8078",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -64,6 +71,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        {/* Google Analytics 4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-PH6QJ83F38"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-PH6QJ83F38');
+          `}
+        </Script>
+      </head>
       <body className="flex min-h-screen flex-col font-sans antialiased">
         <Header />
         <main className="flex-1">{children}</main>
